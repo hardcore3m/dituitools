@@ -46,6 +46,7 @@ exports.create = async (req, res) => {
                 versions: fields.versions,
                 img:filename
             })
+            
             .save((err, data) => {
 
                 if (err) {
