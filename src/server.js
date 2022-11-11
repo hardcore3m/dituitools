@@ -19,11 +19,13 @@ var indexRouter = require('./routes/index.routes');
 // var environmentsRouter = require('./routes/environments.routes');
 var applicationsRouter = require('./routes/applications.routes');
 var paradigmsRouter = require('./routes/paradigms.routes');
+var bookmarksCategoryRouter = require('./routes/bookmarkCategory.routes');
 
 
 // app.use('/environments',environmentsRouter);
 app.use('/applications',applicationsRouter);
 app.use('/paradigms',paradigmsRouter);
+app.use('/bookmarks/categories',bookmarksCategoryRouter);
 app.use('/',indexRouter);
 
 function Main(){
