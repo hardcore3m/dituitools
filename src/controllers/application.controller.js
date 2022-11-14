@@ -11,7 +11,7 @@ exports.list = async (req, res) => {
     try {
         Application.find().then((data) => {
 
-            res.status(200).send(data)
+            res.status(200).json(data)
         })
 
     } catch (error) {
@@ -73,7 +73,7 @@ exports.read = (req, res) => {
     try {
         Application.findOne({_id:id}).then((data) => {
 
-            res.status(200).send(data)
+            res.status(200).json(data)
         })
         
     } catch (error) {

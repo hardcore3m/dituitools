@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const opts = {
     toJSON: {
-        virtuals: true,transform(doc,ret){
+        virtuals: true,
+        transform(doc, ret) {
             ret.id = ret._id;
             ret.img = `${root}${ret.img}`
             delete ret._id;
@@ -11,7 +12,7 @@ const opts = {
     timestamps: true
 };
 
-const BookmarkCategory = mongoose.model("BookmarkCategory", new mongoose.Schema({
+const Bookmark = mongoose.model("Bookmark", new mongoose.Schema({
     _id: {
         type: String,
         required: [true, "a category must to have an id"]
