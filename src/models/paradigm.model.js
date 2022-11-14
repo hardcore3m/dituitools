@@ -1,8 +1,15 @@
 const mongoose = require("mongoose");
 
+const root = 'http://localhost:3001/img/paradigms/';
+
 const opts = {
     toJSON: {
-        virtuals: true
+        virtuals: true,
+        transform(doc, ret) {
+            ret.id = ret._id;
+            ret.img = `${root}${ret.img}`
+            delete ret._id;
+        }
     },
     timestamps: true
 };

@@ -2,12 +2,7 @@ const mongoose = require("mongoose");
 
 const opts = {
     toJSON: {
-        virtuals: true,
-        transform(doc, ret) {
-            ret.id = ret._id;
-            ret.img = `${root}${ret.img}`
-            delete ret._id;
-        }
+        virtuals: true
     },
     timestamps: true
 };
@@ -15,20 +10,30 @@ const opts = {
 const Bookmark = mongoose.model("Bookmark", new mongoose.Schema({
     _id: {
         type: String,
-        required: [true, "a category must to have an id"]
+        required: [true, "a bookmark must to have an id"]
     },
     name: {
         type: String,
-        required: [true, "a category must to have an name"]
+        required: [true, "a bookmark must to have an name"]
     },
     description: {
         type: String,
-        required: [true, "a category must to have a description"]
+        required: [true, "a bookmark must to have a description"]
     },
-    img: {
+    hyperlink: {
         type: String,
-        required: [false]
-    }
+        required: [true, "a bookmark must to have a hypelink"]
+    },
+    category: {
+        type: mongoose.Schema.Types.String,
+        ref: 'BookmarkCategory',
+        required: [true, "a bookmark must to have a hypelink"]
+    },
+    applications:[{
+        type: mongoose.Schema.Types.String,
+        ref: 'Application',
+        required: [true, "a bookmark must to have a hypelink"]
+    }]
 }, opts))
 
 
