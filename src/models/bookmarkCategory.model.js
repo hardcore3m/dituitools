@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 
+const root = 'http://localhost:3001/img/categories/';
+
 const opts = {
     toJSON: {
-        virtuals: true,transform(doc,ret){
+        virtuals: true,
+        transform(doc, ret) {
             ret.id = ret._id;
-            ret.img = `${root}${ret.img}`
+            ret.img = `${root}${ret._id}.${ret.img}`
             delete ret._id;
         }
     },
@@ -12,10 +15,6 @@ const opts = {
 };
 
 const BookmarkCategory = mongoose.model("BookmarkCategory", new mongoose.Schema({
-    _id: {
-        type: String,
-        required: [true, "a category must to have an id"]
-    },
     name: {
         type: String,
         required: [true, "a category must to have an name"]
@@ -26,7 +25,7 @@ const BookmarkCategory = mongoose.model("BookmarkCategory", new mongoose.Schema(
     },
     img: {
         type: String,
-        required: [false]
+        required: [false]   
     }
 }, opts))
 

@@ -35,18 +35,18 @@ exports.create = async (req, res) => {
                 error: err,
             });
         }
-        const type = files.myFile.mimetype.split("/").pop();
-        const filename = `${fields.id}.${type}`
-
+        const imgExtension = files.myFile.mimetype.split("/").pop();
+        
         new BookmarkCategory({
-                _id: fields.id,
-                name: fields.name,
-                description: fields.description,
-                img: filename
-            })
-
-            .save((err, data) => {
-
+            _id: fields.id,
+            name: fields.name,
+            description: fields.description,
+            img: imgExtension
+        })
+        
+        .save((err, data) => {
+            const filename = `${data._id}.${imgExtension}`
+            
                 if (err) {
                     console.log("error", err);
                     res.status(400).send("Error!")

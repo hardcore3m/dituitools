@@ -7,7 +7,7 @@ const opts = {
         virtuals: true,
         transform(doc, ret) {
             ret.id = ret._id;
-            ret.img = `${root}${ret.img}`
+            ret.img = `${root}${ret._id}.${ret.img}`
             delete ret._id;
         }
     },
@@ -15,10 +15,6 @@ const opts = {
 };
 
 const Paradigm = mongoose.model("Paradigm", new mongoose.Schema({
-    _id: {
-        type: String,
-        required: [true, "a paradigm must to have an id"]
-    },
     name: {
         type: String,
         required: [true, "a paradigm must to have an name"]
@@ -29,7 +25,7 @@ const Paradigm = mongoose.model("Paradigm", new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['Imperativo','Declarativo','Relativo']
+        enum: ['Imperativo', 'Declarativo', 'Relativo']
     },
     img: {
         type: String,
