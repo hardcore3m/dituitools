@@ -9,7 +9,7 @@ const {
 
 exports.list = async (req, res) => {
     try {
-        Paradigm.find().then((data) => {
+        Paradigm.find().sort({name:1}).then((data) => {
 
             res.status(200).send(data)
         })

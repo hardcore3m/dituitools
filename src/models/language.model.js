@@ -21,8 +21,8 @@ const Languange = mongoose.model("Languange", new mongoose.Schema({
         type: String,
         required: [true, "a languange must to have an name"]
     },
-    launchDate: {
-        type: Date,
+    launchYear: {
+        type: Number,
         required: [false]
     },
     documentation: {
@@ -31,7 +31,8 @@ const Languange = mongoose.model("Languange", new mongoose.Schema({
     },
     paradigm: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'paradigm'
+        ref: 'paradigm',
+        required: [true, "a languange must to have a paradigm"]
     },
     versions: {
         type: [String]

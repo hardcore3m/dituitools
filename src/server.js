@@ -21,11 +21,13 @@ var indexRouter = require('./routes/index.routes');
 var applicationsRouter = require('./routes/applications.routes');
 var paradigmsRouter = require('./routes/paradigms.routes');
 var bookmarksCategoryRouter = require('./routes/bookmarkCategory.routes');
+var languagesRouter = require('./routes/languages.routes');
 
+app.use('/', indexRouter);
 app.use('/applications', applicationsRouter);
 app.use('/paradigms', paradigmsRouter);
 app.use('/bookmarks/categories', bookmarksCategoryRouter);
-app.use('/', indexRouter);
+app.use('/languages', languagesRouter);
 
 function Main() {
     let startTime = new Date()

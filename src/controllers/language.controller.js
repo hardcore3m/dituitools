@@ -3,13 +3,13 @@ const db = require("../models");
 const fs = require('fs')
 
 const {
-    paradigm: Paradigm,
+    language: Language,
 
 } = db;
 
 exports.list = async (req, res) => {
     try {
-        Paradigm.find().then((data) => {
+        Language.find().populate().then((data) => {
 
             res.status(200).send(data)
         })
@@ -24,7 +24,7 @@ exports.create = async (req, res) => {
     const form = new formidable.IncomingForm();
     form.multiples = false;
     form.maxFileSize = 5 * 1024 * 1024; // 5MB
-    form.uploadDir = './public/img/paradigms'
+    form.uploadDir = './public/img/languages'
 
     form.parse(req, async (err, fields, files) => {
         if (err) {
@@ -37,11 +37,14 @@ exports.create = async (req, res) => {
         }
         const imgType = files.myFile.mimetype.split("/").pop();
         
-        new Paradigm({
+        new Language({
             
             name: fields.name,
-            description: fields.description,
-            type: fields.type,
+            launchYear: fields.launchYear,
+            paradigm:fields.paradigm,
+            documentation: fields.documentation,
+            versions:fields.versions,
+            install: fields.install,
             img: imgType
         })
         .save((err, data) => {
@@ -53,7 +56,7 @@ exports.create = async (req, res) => {
                 }
 
                 var oldpath = files.myFile.filepath;
-                var newpath = './public/img/paradigms/' + filename;
+                var newpath = './public/img/languages/' + filename;
 
                 fs.rename(oldpath, newpath, function (err) {
                     if (err) res.status(400).send(err)
@@ -68,9 +71,9 @@ exports.create = async (req, res) => {
 exports.read = (req, res) => {
     var id = req.params.id
     try {
-        Paradigm.findOne({
+        Language.findOne({
             _id: id
-        }).then((data) => {
+        }).populate().then((data) => {
 
             res.status(200).send(data)
         })
@@ -82,12 +85,15 @@ exports.read = (req, res) => {
 exports.update = async (req, res) => {
     let id = req.params.id
     try {
-        Paradigm.findByIdAndUpdate({
+        Language.findByIdAndUpdate({
             id
         }, {
-            name: req.body.name,
-            description: req.body.description,
-            type: req.body.type
+            name: fields.name,
+            launchYear: fields.launchYear,
+            paradigm:fields.paradigm,
+            documentation: fields.documentation,
+            versions:fields.versions,
+            install: fields.install
         }).save((err, data) => {
             if (err) {
                 res.status(400).send(err)

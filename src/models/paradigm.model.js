@@ -21,7 +21,7 @@ const Paradigm = mongoose.model("Paradigm", new mongoose.Schema({
     },
     description: {
         type: String,
-        required: [true, "a bookmark must to have a description"]
+        required: [true, "a paradigm must to have a description"]
     },
     type: {
         type: String,
