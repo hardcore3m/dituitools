@@ -9,9 +9,9 @@ const {
 
 exports.list = async (req, res) => {
     try {
-        Language.find().populate().then((data) => {
+        Language.find().populate('paradigm').then((data) => {
 
-            res.status(200).send(data)
+            res.status(200).json(data)
         })
 
     } catch (error) {
@@ -73,7 +73,7 @@ exports.read = (req, res) => {
     try {
         Language.findOne({
             _id: id
-        }).populate().then((data) => {
+        }).populate('paradigm').then((data) => {
 
             res.status(200).send(data)
         })
