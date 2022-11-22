@@ -37,13 +37,15 @@ exports.create = async (req, res) => {
         }
         const imgType = files.myFile.mimetype.split("/").pop();
         
+        let _versions = JSON.parse(fields.versions)
+
         new Language({
             
             name: fields.name,
             launchYear: fields.launchYear,
             paradigm:fields.paradigm,
             documentation: fields.documentation,
-            versions:fields.versions,
+            versions:_versions,
             install: fields.install,
             img: imgType
         })
